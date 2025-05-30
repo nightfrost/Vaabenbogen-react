@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Owner } from './Owner';
+import type { Company } from './Company';
 import {
-    OwnerFromJSON,
-    OwnerFromJSONTyped,
-    OwnerToJSON,
-    OwnerToJSONTyped,
-} from './Owner';
+    CompanyFromJSON,
+    CompanyFromJSONTyped,
+    CompanyToJSON,
+    CompanyToJSONTyped,
+} from './Company';
 import type { WeaponType } from './WeaponType';
 import {
     WeaponTypeFromJSON,
@@ -34,6 +34,13 @@ import {
     LoadfunctionNullableToJSON,
     LoadfunctionNullableToJSONTyped,
 } from './LoadfunctionNullable';
+import type { Person } from './Person';
+import {
+    PersonFromJSON,
+    PersonFromJSONTyped,
+    PersonToJSON,
+    PersonToJSONTyped,
+} from './Person';
 import type { WeaponStatus } from './WeaponStatus';
 import {
     WeaponStatusFromJSON,
@@ -140,16 +147,52 @@ export interface Weapon {
     discharged?: Date | null;
     /**
      * 
-     * @type {Owner}
+     * @type {number}
      * @memberof Weapon
      */
-    submitter?: Owner;
+    submitterPersonId?: number | null;
     /**
      * 
-     * @type {Owner}
+     * @type {Person}
      * @memberof Weapon
      */
-    dischargedTo?: Owner;
+    submitterPerson?: Person;
+    /**
+     * 
+     * @type {number}
+     * @memberof Weapon
+     */
+    submitterCompanyId?: number | null;
+    /**
+     * 
+     * @type {Company}
+     * @memberof Weapon
+     */
+    submitterCompany?: Company;
+    /**
+     * 
+     * @type {number}
+     * @memberof Weapon
+     */
+    dischargedToPersonId?: number | null;
+    /**
+     * 
+     * @type {Person}
+     * @memberof Weapon
+     */
+    dischargedToPerson?: Person;
+    /**
+     * 
+     * @type {number}
+     * @memberof Weapon
+     */
+    dischargedToCompanyId?: number | null;
+    /**
+     * 
+     * @type {Company}
+     * @memberof Weapon
+     */
+    dischargedToCompany?: Company;
 }
 
 
@@ -186,8 +229,14 @@ export function WeaponFromJSONTyped(json: any, ignoreDiscriminator: boolean): We
         'updated': json['updated'] == null ? undefined : (new Date(json['updated'])),
         'updatedBy': json['updatedBy'] == null ? undefined : json['updatedBy'],
         'discharged': json['discharged'] == null ? undefined : (new Date(json['discharged'])),
-        'submitter': json['submitter'] == null ? undefined : OwnerFromJSON(json['submitter']),
-        'dischargedTo': json['dischargedTo'] == null ? undefined : OwnerFromJSON(json['dischargedTo']),
+        'submitterPersonId': json['submitterPersonId'] == null ? undefined : json['submitterPersonId'],
+        'submitterPerson': json['submitterPerson'] == null ? undefined : PersonFromJSON(json['submitterPerson']),
+        'submitterCompanyId': json['submitterCompanyId'] == null ? undefined : json['submitterCompanyId'],
+        'submitterCompany': json['submitterCompany'] == null ? undefined : CompanyFromJSON(json['submitterCompany']),
+        'dischargedToPersonId': json['dischargedToPersonId'] == null ? undefined : json['dischargedToPersonId'],
+        'dischargedToPerson': json['dischargedToPerson'] == null ? undefined : PersonFromJSON(json['dischargedToPerson']),
+        'dischargedToCompanyId': json['dischargedToCompanyId'] == null ? undefined : json['dischargedToCompanyId'],
+        'dischargedToCompany': json['dischargedToCompany'] == null ? undefined : CompanyFromJSON(json['dischargedToCompany']),
     };
 }
 
@@ -217,8 +266,14 @@ export function WeaponToJSONTyped(value?: Weapon | null, ignoreDiscriminator: bo
         'updated': value['updated'] == null ? undefined : ((value['updated'] as any).toISOString()),
         'updatedBy': value['updatedBy'],
         'discharged': value['discharged'] == null ? undefined : ((value['discharged'] as any).toISOString()),
-        'submitter': OwnerToJSON(value['submitter']),
-        'dischargedTo': OwnerToJSON(value['dischargedTo']),
+        'submitterPersonId': value['submitterPersonId'],
+        'submitterPerson': PersonToJSON(value['submitterPerson']),
+        'submitterCompanyId': value['submitterCompanyId'],
+        'submitterCompany': CompanyToJSON(value['submitterCompany']),
+        'dischargedToPersonId': value['dischargedToPersonId'],
+        'dischargedToPerson': PersonToJSON(value['dischargedToPerson']),
+        'dischargedToCompanyId': value['dischargedToCompanyId'],
+        'dischargedToCompany': CompanyToJSON(value['dischargedToCompany']),
     };
 }
 

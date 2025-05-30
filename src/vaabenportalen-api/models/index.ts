@@ -5,7 +5,6 @@ export * from './Discharge';
 export * from './LoadfunctionNullable';
 export * from './LoginRequest';
 export * from './LoginResponse';
-export * from './Owner';
 export * from './Person';
 export * from './User';
 export * from './UserCreateDTO';

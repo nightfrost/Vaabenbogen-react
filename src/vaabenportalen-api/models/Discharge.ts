@@ -13,13 +13,20 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Owner } from './Owner';
+import type { Company } from './Company';
 import {
-    OwnerFromJSON,
-    OwnerFromJSONTyped,
-    OwnerToJSON,
-    OwnerToJSONTyped,
-} from './Owner';
+    CompanyFromJSON,
+    CompanyFromJSONTyped,
+    CompanyToJSON,
+    CompanyToJSONTyped,
+} from './Company';
+import type { Person } from './Person';
+import {
+    PersonFromJSON,
+    PersonFromJSONTyped,
+    PersonToJSON,
+    PersonToJSONTyped,
+} from './Person';
 
 /**
  * 
@@ -59,10 +66,28 @@ export interface Discharge {
     basepieceNumber?: string | null;
     /**
      * 
-     * @type {Owner}
+     * @type {number}
      * @memberof Discharge
      */
-    dischargedTo?: Owner;
+    dischargedToPersonId?: number | null;
+    /**
+     * 
+     * @type {Person}
+     * @memberof Discharge
+     */
+    dischargedToPerson?: Person;
+    /**
+     * 
+     * @type {number}
+     * @memberof Discharge
+     */
+    dischargedToCompanyId?: number | null;
+    /**
+     * 
+     * @type {Company}
+     * @memberof Discharge
+     */
+    dischargedToCompany?: Company;
     /**
      * 
      * @type {Date}
@@ -111,7 +136,10 @@ export function DischargeFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'systemNumber': json['systemNumber'] == null ? undefined : json['systemNumber'],
         'barrelNumber': json['barrelNumber'] == null ? undefined : json['barrelNumber'],
         'basepieceNumber': json['basepieceNumber'] == null ? undefined : json['basepieceNumber'],
-        'dischargedTo': json['dischargedTo'] == null ? undefined : OwnerFromJSON(json['dischargedTo']),
+        'dischargedToPersonId': json['dischargedToPersonId'] == null ? undefined : json['dischargedToPersonId'],
+        'dischargedToPerson': json['dischargedToPerson'] == null ? undefined : PersonFromJSON(json['dischargedToPerson']),
+        'dischargedToCompanyId': json['dischargedToCompanyId'] == null ? undefined : json['dischargedToCompanyId'],
+        'dischargedToCompany': json['dischargedToCompany'] == null ? undefined : CompanyFromJSON(json['dischargedToCompany']),
         'created': json['created'] == null ? undefined : (new Date(json['created'])),
         'createdBy': json['createdBy'] == null ? undefined : json['createdBy'],
         'updated': json['updated'] == null ? undefined : (new Date(json['updated'])),
@@ -135,7 +163,10 @@ export function DischargeToJSONTyped(value?: Discharge | null, ignoreDiscriminat
         'systemNumber': value['systemNumber'],
         'barrelNumber': value['barrelNumber'],
         'basepieceNumber': value['basepieceNumber'],
-        'dischargedTo': OwnerToJSON(value['dischargedTo']),
+        'dischargedToPersonId': value['dischargedToPersonId'],
+        'dischargedToPerson': PersonToJSON(value['dischargedToPerson']),
+        'dischargedToCompanyId': value['dischargedToCompanyId'],
+        'dischargedToCompany': CompanyToJSON(value['dischargedToCompany']),
         'created': value['created'] == null ? undefined : ((value['created']).toISOString()),
         'createdBy': value['createdBy'],
         'updated': value['updated'] == null ? undefined : ((value['updated'] as any).toISOString()),

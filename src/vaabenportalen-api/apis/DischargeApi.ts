@@ -34,17 +34,6 @@ export interface GetDischargeByIdRequest {
     id: number;
 }
 
-export interface GetDischargesBySearchParametersRequest {
-    weaponID?: string;
-    systemNumber?: string;
-    barrelNumber?: string;
-    basepieceNumber?: string;
-}
-
-export interface GetDischargesBySearchQueryRequest {
-    query: string;
-}
-
 export interface UpdateDischargeRequest {
     id: number;
     discharge: Discharge;
@@ -171,77 +160,6 @@ export class DischargeApi extends runtime.BaseAPI {
      */
     async getDischargeById(requestParameters: GetDischargeByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Discharge> {
         const response = await this.getDischargeByIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     */
-    async getDischargesBySearchParametersRaw(requestParameters: GetDischargesBySearchParametersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Discharge>>> {
-        const queryParameters: any = {};
-
-        if (requestParameters['weaponID'] != null) {
-            queryParameters['weaponID'] = requestParameters['weaponID'];
-        }
-
-        if (requestParameters['systemNumber'] != null) {
-            queryParameters['systemNumber'] = requestParameters['systemNumber'];
-        }
-
-        if (requestParameters['barrelNumber'] != null) {
-            queryParameters['barrelNumber'] = requestParameters['barrelNumber'];
-        }
-
-        if (requestParameters['basepieceNumber'] != null) {
-            queryParameters['basepieceNumber'] = requestParameters['basepieceNumber'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/discharge/search`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DischargeFromJSON));
-    }
-
-    /**
-     */
-    async getDischargesBySearchParameters(requestParameters: GetDischargesBySearchParametersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Discharge>> {
-        const response = await this.getDischargesBySearchParametersRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     */
-    async getDischargesBySearchQueryRaw(requestParameters: GetDischargesBySearchQueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Discharge>>> {
-        if (requestParameters['query'] == null) {
-            throw new runtime.RequiredError(
-                'query',
-                'Required parameter "query" was null or undefined when calling getDischargesBySearchQuery().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/discharge/search={query}`.replace(`{${"query"}}`, encodeURIComponent(String(requestParameters['query']))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(DischargeFromJSON));
-    }
-
-    /**
-     */
-    async getDischargesBySearchQuery(requestParameters: GetDischargesBySearchQueryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Discharge>> {
-        const response = await this.getDischargesBySearchQueryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
