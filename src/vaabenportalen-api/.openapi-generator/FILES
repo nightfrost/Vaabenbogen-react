@@ -14,6 +14,7 @@ models/LoginResponse.ts
 models/Person.ts
 models/User.ts
 models/UserCreateDTO.ts
+models/UserPasswordUpdateDTO.ts
 models/Weapon.ts
 models/WeaponStatus.ts
 models/WeaponType.ts

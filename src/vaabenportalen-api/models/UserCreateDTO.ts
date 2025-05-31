@@ -24,6 +24,24 @@ export interface UserCreateDTO {
      * @type {string}
      * @memberof UserCreateDTO
      */
+    firstName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreateDTO
+     */
+    lastName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreateDTO
+     */
+    email?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreateDTO
+     */
     username?: string | null;
     /**
      * 
@@ -50,6 +68,9 @@ export function UserCreateDTOFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
+        'firstName': json['firstName'] == null ? undefined : json['firstName'],
+        'lastName': json['lastName'] == null ? undefined : json['lastName'],
+        'email': json['email'] == null ? undefined : json['email'],
         'username': json['username'] == null ? undefined : json['username'],
         'password': json['password'] == null ? undefined : json['password'],
     };
@@ -66,6 +87,9 @@ export function UserCreateDTOToJSONTyped(value?: UserCreateDTO | null, ignoreDis
 
     return {
         
+        'firstName': value['firstName'],
+        'lastName': value['lastName'],
+        'email': value['email'],
         'username': value['username'],
         'password': value['password'],
     };

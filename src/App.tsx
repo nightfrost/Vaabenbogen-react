@@ -5,6 +5,7 @@ import WeaponCreate from "./pages/weapon/WeaponCreate";
 import WeaponEdit from "./pages/weapon/WeaponEdit";
 import WeaponDetail from "./pages/weapon/WeaponDetail";
 import Login from "./pages/login/Login";
+import CustomerPage from "./pages/customer/CustomerPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <div className="flex-1 flex items-center gap-2">
           <Link to="/" className="btn btn-ghost text-2xl px-4 py-2">Vaabenbogen</Link>
           <Link to="/weapons" className="btn btn-ghost text-xl px-4 py-2">Våben</Link>
+          <Link to="/customers" className="btn btn-ghost text-xl px-4 py-2">Kunder</Link>
         </div>
         <div className="flex-none">
           <Link to="/login" className="btn btn-ghost text-xl px-4 py-2">Login</Link>
@@ -24,6 +26,7 @@ function App() {
         <Route path="/weapons/create" element={<WeaponCreate />} />
         <Route path="/weapons/:id/edit" element={<WeaponEdit />} />
         <Route path="/weapons/:id" element={<WeaponDetail />} />
+        <Route path="/customers" element={<CustomerPage />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>

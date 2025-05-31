@@ -30,6 +30,24 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    firstName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    lastName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    email?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
     username?: string | null;
     /**
      * 
@@ -57,6 +75,9 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     return {
         
         'id': json['id'] == null ? undefined : json['id'],
+        'firstName': json['firstName'] == null ? undefined : json['firstName'],
+        'lastName': json['lastName'] == null ? undefined : json['lastName'],
+        'email': json['email'] == null ? undefined : json['email'],
         'username': json['username'] == null ? undefined : json['username'],
         'passwordHash': json['passwordHash'] == null ? undefined : json['passwordHash'],
     };
@@ -74,6 +95,9 @@ export function UserToJSONTyped(value?: User | null, ignoreDiscriminator: boolea
     return {
         
         'id': value['id'],
+        'firstName': value['firstName'],
+        'lastName': value['lastName'],
+        'email': value['email'],
         'username': value['username'],
         'passwordHash': value['passwordHash'],
     };

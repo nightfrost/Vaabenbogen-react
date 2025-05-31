@@ -17,12 +17,15 @@ import * as runtime from '../runtime';
 import type {
   User,
   UserCreateDTO,
+  UserPasswordUpdateDTO,
 } from '../models/index';
 import {
     UserFromJSON,
     UserToJSON,
     UserCreateDTOFromJSON,
     UserCreateDTOToJSON,
+    UserPasswordUpdateDTOFromJSON,
+    UserPasswordUpdateDTOToJSON,
 } from '../models/index';
 
 export interface CreateUserRequest {
@@ -35,6 +38,11 @@ export interface DeleteUserRequest {
 
 export interface GetUserByIdRequest {
     id: number;
+}
+
+export interface UpdatePasswordRequest {
+    id: number;
+    userPasswordUpdateDTO: UserPasswordUpdateDTO;
 }
 
 export interface UpdateUserRequest {
@@ -164,6 +172,46 @@ export class UserApi extends runtime.BaseAPI {
     async getUserById(requestParameters: GetUserByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<User> {
         const response = await this.getUserByIdRaw(requestParameters, initOverrides);
         return await response.value();
+    }
+
+    /**
+     */
+    async updatePasswordRaw(requestParameters: UpdatePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling updatePassword().'
+            );
+        }
+
+        if (requestParameters['userPasswordUpdateDTO'] == null) {
+            throw new runtime.RequiredError(
+                'userPasswordUpdateDTO',
+                'Required parameter "userPasswordUpdateDTO" was null or undefined when calling updatePassword().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/user/{id}/password`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserPasswordUpdateDTOToJSON(requestParameters['userPasswordUpdateDTO']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async updatePassword(requestParameters: UpdatePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.updatePasswordRaw(requestParameters, initOverrides);
     }
 
     /**

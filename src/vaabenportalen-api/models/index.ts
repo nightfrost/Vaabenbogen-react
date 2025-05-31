@@ -8,6 +8,7 @@ export * from './LoginResponse';
 export * from './Person';
 export * from './User';
 export * from './UserCreateDTO';
+export * from './UserPasswordUpdateDTO';
 export * from './Weapon';
 export * from './WeaponStatus';
 export * from './WeaponType';
