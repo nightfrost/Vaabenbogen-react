@@ -7,7 +7,7 @@ import WeaponDetail from "./pages/weapon/WeaponDetail";
 import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import CustomerPage from "./pages/customer/CustomerPage";
-import IndexPage from "./pages/Index";
+import IndexPage from "./pages/Index/IndexPage";
 
 function App() {
   return (
